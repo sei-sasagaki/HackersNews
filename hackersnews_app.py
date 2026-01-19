@@ -1,11 +1,14 @@
 import requests
 import time
 
-# Top　Stories（Up to 500） 最後に.jsonをつけないと取得できない。
-response_top = requests.get("https://hacker-news.firebaseio.com//v0/topstories.json")
+# Top　Stories（Up to 500） URLの最後に.jsonをつけないと取得できない。
+response_top = requests.get("https://hacker-news.firebaseio.com//v0/topstories.json").json()
 
 # Top　StoriesのIDをリスト形式にする
-topstory_id_list = response_top.text.replace("[", "").replace("]", "").split(",")
+# topstory_id_list = response_top.text.replace("[", "").replace("]", "").split(",")
+
+# .json()をつけることでPythonの辞書として使用できる
+topstory_id_list = response_top
 
 # ID毎にタイトルとリンクを取得し出力する。（３０件）
 for id in topstory_id_list[:30]:
